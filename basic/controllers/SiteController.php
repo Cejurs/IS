@@ -12,6 +12,7 @@ use app\models\ContactForm;
 use app\models\SignUpForm;
 use app\models\User;
 use app\components\Mailer;
+use app\models\Contact;
 
 class SiteController extends Controller
 {
@@ -135,9 +136,22 @@ class SiteController extends Controller
     public function actionContact()
     {
         $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
+        if(!Yii::$app->user->isGuest){
+            $model->email=Yii::$app->user->identity->email;
+            $model->name =Yii::$app->user->identity->userName;
+        }
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             Yii::$app->session->setFlash('contactFormSubmitted');
-
+            $contact=new Contact();
+            $contact->email=$model->email;
+            $contact->name=$model->name;
+            $contact->subject=$model->subject;
+            $contact->body=$model->body;
+            if(!Yii::$app->user->isGuest)
+            {
+                $contact->idUser=Yii::$app->user->identity->idUser;
+            }
+            $contact->save();
             return $this->refresh();
         }
         return $this->render('contact', [

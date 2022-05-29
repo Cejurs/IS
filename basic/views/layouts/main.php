@@ -40,17 +40,18 @@ AppAsset::register($this);
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'AdminPanel', 'url' => ['/admin/index'],'visible' => Yii::$app->user->identity->role==='ADMIN'],
             Yii::$app->user->isGuest ? (
                 [
                     'label' => 'Authorization',
                      'items' => [
                          ['label' => 'SignUp', 'url' => ['/site/signup']],
                          ['label' => 'Login', 'url' => ['/site/login']],
-                ],]
+                        ],
+                ]
             ) : (
                 ['label'=> 'Logout('.Yii::$app->user->identity->userName.')','url'=>['/site/logout']]
-            ),
-            ['label' => 'AdminPanel', 'url' => ['/admin/index'],'visible' => Yii::$app->user->identity->role==='ADMIN']
+            )
         ],
     ]);
     NavBar::end();
