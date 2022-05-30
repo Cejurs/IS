@@ -13,6 +13,9 @@ use app\models\SignUpForm;
 use app\models\User;
 use app\components\Mailer;
 use app\models\Contact;
+use app\models\Apartment;
+use yii\data\ActiveDataProvider;
+use yii\data\Pagination;
 
 class SiteController extends Controller
 {
@@ -65,9 +68,25 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $query = Apartment::find();
+        $countQuery = clone $query;
+        $pages = new Pagination(['totalCount' => $countQuery->count(),'pageSize'=>6]);
+        $models = $query->offset($pages->offset)
+        ->limit($pages->limit)
+        ->all();
+
+        return $this->render('index', [
+         'models' => $models,
+         'pages' => $pages,
+    ]);
+        //return $this->render('index',['dataProvider'=>$dataProvider]);
     }
 
+    public function actionView($id)
+    {
+        $appartment=Apartment::findOne($id);
+        return $this->render('apartment2',['model'=>$appartment]);
+    }
     public function actionSignup()
     {
         if (!Yii::$app->user->isGuest) {

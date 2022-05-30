@@ -1,49 +1,233 @@
-ЗАДАНИЕ №15
-на курсовую работу по дисциплине «Информационные системы»
+<p align="center">
+    <a href="https://github.com/yiisoft" target="_blank">
+        <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">
+    </a>
+    <h1 align="center">Yii 2 Basic Project Template</h1>
+    <br>
+</p>
 
-1. Тема курсовой работы: «Автоматизированная система «Аренда недвижимости»».
+Yii 2 Basic Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
+rapidly creating small projects.
 
-2. Требования к курсовой работе:
-2.1. Система разрабатывается для гипотетической или реальной (при наличии такой возможности) фирмы в виде сайта.
-2.2. Для поддержки сайта от персонала не должно требоваться специальных технических навыков.
-2.3. Предусмотреть механизм резервного копирования структуры и содержимого базы данных.
-2.4. Предусмотреть разграничение прав доступа.
-2.5. Выбрать и обосновать платформу для разработки системы и её функционирования.
-2.4. Автоматизируемые функции:
-•	оперативное формирование платежей и начислений по договорам;
-•	индикация и оповещения клиентов по просроченным платежам;
-•	работа с обращениями (обслуживание, проблемы, договоры);
-•	поиск альтернативных вариантов аренды;
-•	сдача в аренду объектов недвижимости;
-•	поиск по базе объектов;
-•	контроль прихода оплаты на основании отчета дебиторской задолженности;
-•	автоматический расчет пени по срокам/услугам согласно договора с каждым арендатором;
-•	формирование уведомления, претензии;
-•	формирование печатных форм договоров, дополнительных соглашений.
-2.7. В первой очереди системы программно реализовать следующие функции:
-•	интерфейс системы;
-•	поиск по базе объектов;
-•	сдача в аренду объектов недвижимости.
-2.8. При проектировании базы данных предусмотреть построение ER-диаграммы по одной из известных методологий.
-2.9. При разработке программного обеспечения предусмотреть использование UML. 
-3. Содержание работы:
-3.1. Исследование предметной области:
-•	исследование бизнес-процессов и информационных потоков предметной области с использованием методологий IDEF0 и/или IDEF3, и/или DFD (as-is);
-•	аналитический обзор систем и методов;
-•	построение моделей IDEF0 и/или IDEF3, и/или DFD (to-be);
-3.2. Постановка задач проекта:
-•	назначение и цели создания системы;
+The template contains the basic features including user login/logout and a contact page.
+It includes all commonly used configurations that would allow you to focus on adding new
+features to your application.
 
-•	требования к проектируемой системе в целом и отдельным видам обеспечения;
-•	математическая постановка задач;
-3.3. Проектные решения по системе в целом и отдельным видам обеспечения:
-•	карта сайта;
-•	архитектура системы;
-•	решения по организационному обеспечению системы;
-•	решения по информационному обеспечению системы;
-•	решения по программному обеспечению системы;
-•	тестирование системы;
-•	описание функционирования системы.
-3.4. Оформление пояснительной записки и подготовка к защите курсовой работы.
+[![Latest Stable Version](https://img.shields.io/packagist/v/yiisoft/yii2-app-basic.svg)](https://packagist.org/packages/yiisoft/yii2-app-basic)
+[![Total Downloads](https://img.shields.io/packagist/dt/yiisoft/yii2-app-basic.svg)](https://packagist.org/packages/yiisoft/yii2-app-basic)
+[![build](https://github.com/yiisoft/yii2-app-basic/workflows/build/badge.svg)](https://github.com/yiisoft/yii2-app-basic/actions?query=workflow%3Abuild)
+
+DIRECTORY STRUCTURE
+-------------------
+
+      assets/             contains assets definition
+      commands/           contains console commands (controllers)
+      config/             contains application configurations
+      controllers/        contains Web controller classes
+      mail/               contains view files for e-mails
+      models/             contains model classes
+      runtime/            contains files generated during runtime
+      tests/              contains various tests for the basic application
+      vendor/             contains dependent 3rd-party packages
+      views/              contains view files for the Web application
+      web/                contains the entry script and Web resources
 
 
+
+REQUIREMENTS
+------------
+
+The minimum requirement by this project template that your Web server supports PHP 5.6.0.
+
+
+INSTALLATION
+------------
+
+### Install via Composer
+
+If you do not have [Composer](http://getcomposer.org/), you may install it by following the instructions
+at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
+
+You can then install this project template using the following command:
+
+~~~
+composer create-project --prefer-dist yiisoft/yii2-app-basic basic
+~~~
+
+Now you should be able to access the application through the following URL, assuming `basic` is the directory
+directly under the Web root.
+
+~~~
+http://localhost/basic/web/
+~~~
+
+### Install from an Archive File
+
+Extract the archive file downloaded from [yiiframework.com](http://www.yiiframework.com/download/) to
+a directory named `basic` that is directly under the Web root.
+
+Set cookie validation key in `config/web.php` file to some random secret string:
+
+```php
+'request' => [
+    // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
+    'cookieValidationKey' => '<secret random string goes here>',
+],
+```
+
+You can then access the application through the following URL:
+
+~~~
+http://localhost/basic/web/
+~~~
+
+
+### Install with Docker
+
+Update your vendor packages
+
+    docker-compose run --rm php composer update --prefer-dist
+    
+Run the installation triggers (creating cookie validation code)
+
+    docker-compose run --rm php composer install    
+    
+Start the container
+
+    docker-compose up -d
+    
+You can then access the application through the following URL:
+
+    http://127.0.0.1:8000
+
+**NOTES:** 
+- Minimum required Docker engine version `17.04` for development (see [Performance tuning for volume mounts](https://docs.docker.com/docker-for-mac/osxfs-caching/))
+- The default configuration uses a host-volume in your home directory `.docker-composer` for composer caches
+
+
+CONFIGURATION
+-------------
+
+### Database
+
+Edit the file `config/db.php` with real data, for example:
+
+```php
+return [
+    'class' => 'yii\db\Connection',
+    'dsn' => 'mysql:host=localhost;dbname=yii2basic',
+    'username' => 'root',
+    'password' => '1234',
+    'charset' => 'utf8',
+];
+```
+
+**NOTES:**
+- Yii won't create the database for you, this has to be done manually before you can access it.
+- Check and edit the other files in the `config/` directory to customize your application as required.
+- Refer to the README in the `tests` directory for information specific to basic application tests.
+
+
+TESTING
+-------
+
+Tests are located in `tests` directory. They are developed with [Codeception PHP Testing Framework](http://codeception.com/).
+By default, there are 3 test suites:
+
+- `unit`
+- `functional`
+- `acceptance`
+
+Tests can be executed by running
+
+```
+vendor/bin/codecept run
+```
+
+The command above will execute unit and functional tests. Unit tests are testing the system components, while functional
+tests are for testing user interaction. Acceptance tests are disabled by default as they require additional setup since
+they perform testing in real browser. 
+
+
+### Running  acceptance tests
+
+To execute acceptance tests do the following:  
+
+1. Rename `tests/acceptance.suite.yml.example` to `tests/acceptance.suite.yml` to enable suite configuration
+
+2. Replace `codeception/base` package in `composer.json` with `codeception/codeception` to install full-featured
+   version of Codeception
+
+3. Update dependencies with Composer 
+
+    ```
+    composer update  
+    ```
+
+4. Download [Selenium Server](http://www.seleniumhq.org/download/) and launch it:
+
+    ```
+    java -jar ~/selenium-server-standalone-x.xx.x.jar
+    ```
+
+    In case of using Selenium Server 3.0 with Firefox browser since v48 or Google Chrome since v53 you must download [GeckoDriver](https://github.com/mozilla/geckodriver/releases) or [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/downloads) and launch Selenium with it:
+
+    ```
+    # for Firefox
+    java -jar -Dwebdriver.gecko.driver=~/geckodriver ~/selenium-server-standalone-3.xx.x.jar
+    
+    # for Google Chrome
+    java -jar -Dwebdriver.chrome.driver=~/chromedriver ~/selenium-server-standalone-3.xx.x.jar
+    ``` 
+    
+    As an alternative way you can use already configured Docker container with older versions of Selenium and Firefox:
+    
+    ```
+    docker run --net=host selenium/standalone-firefox:2.53.0
+    ```
+
+5. (Optional) Create `yii2basic_test` database and update it by applying migrations if you have them.
+
+   ```
+   tests/bin/yii migrate
+   ```
+
+   The database configuration can be found at `config/test_db.php`.
+
+
+6. Start web server:
+
+    ```
+    tests/bin/yii serve
+    ```
+
+7. Now you can run all available tests
+
+   ```
+   # run all available tests
+   vendor/bin/codecept run
+
+   # run acceptance tests
+   vendor/bin/codecept run acceptance
+
+   # run only unit and functional tests
+   vendor/bin/codecept run unit,functional
+   ```
+
+### Code coverage support
+
+By default, code coverage is disabled in `codeception.yml` configuration file, you should uncomment needed rows to be able
+to collect code coverage. You can run your tests and collect coverage with the following command:
+
+```
+#collect coverage for all tests
+vendor/bin/codecept run --coverage --coverage-html --coverage-xml
+
+#collect coverage only for unit tests
+vendor/bin/codecept run unit --coverage --coverage-html --coverage-xml
+
+#collect coverage for unit and functional tests
+vendor/bin/codecept run functional,unit --coverage --coverage-html --coverage-xml
+```
+
+You can see code coverage output under the `tests/_output` directory.

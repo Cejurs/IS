@@ -12,6 +12,9 @@ use app\components\Mailer;
 use app\models\Contact;
 use app\models\ReplyForm;
 use yii\data\ActiveDataProvider;
+use app\models\AddApartmentForm;
+use yii\web\UploadedFile;
+use app\models\Apartment;
 class AdminController extends Controller{
     
     public function behaviors()
@@ -35,7 +38,7 @@ class AdminController extends Controller{
     public function actionIndex()
     {
         $dataProvider=new ActiveDataProvider([
-            "query"=> Contact::find(),
+            "query"=> Contact::find()->where(['status' =>'ACTIVE']),
             "pagination" => [
                 "pageSize" => 20,
             ],
@@ -43,6 +46,30 @@ class AdminController extends Controller{
         return $this->render('index',['dataProvider'=>$dataProvider]);
     }
 
+    public function actionAddApartment()
+    {
+        $model=new AddApartmentForm();
+        if ($model->load(Yii::$app->request->post()))
+        {
+            $model->img=UploadedFile::getInstance($model,'img');
+            if($model->upload()){
+                Yii::$app->session->setFlash('AddFormSubmitted');
+                $apartment=new Apartment();
+                $apartment->img=$model->imgurl;
+                $apartment->name=$model->name;
+                $apartment->adress=$model->adress;
+                $apartment->description=$model->description;
+                $apartment->square=$model->square;
+                if($apartment->save()){
+                    die();
+                };
+
+            };
+            $this->refresh();
+        }
+        return $this->render('addapartment',['model' => $model]);
+
+    }
     public function actionReply($id){
         $contact=Contact::findOne($id);
         $model=new ReplyForm();

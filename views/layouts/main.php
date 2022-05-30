@@ -40,7 +40,15 @@ AppAsset::register($this);
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
-            ['label' => 'AdminPanel', 'url' => ['/admin/index'],'visible' => Yii::$app->user->identity->role==='ADMIN'],
+            [
+                'label' => 'AdminPanel',
+                 'visible' => Yii::$app->user->identity->role==='ADMIN',
+                 'items' => [
+                    ['label' => 'Support', 'url' => ['/admin/index']],
+                    ['label' => 'Add Appartment', 'url' => ['/admin/add-apartment']],
+                 ]
+
+            ],
             Yii::$app->user->isGuest ? (
                 [
                     'label' => 'Authorization',
