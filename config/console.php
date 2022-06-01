@@ -25,6 +25,18 @@ $config = [
                 ],
             ],
         ],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.gmail.com',
+                'username' => 'tt1934840@gmail.com',
+                'password' => 'seqwr123',
+                'port' => '587',
+                'encryption' => 'tls'
+            ],
+        ],
         'db' => $db,
     ],
     'params' => $params,

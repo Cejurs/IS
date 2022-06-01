@@ -27,10 +27,15 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
+                'only' => ['logout','book'],
                 'rules' => [
                     [
                         'actions' => ['logout'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['book'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -68,7 +73,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $query = Apartment::find();
+        $query = Apartment::find()->where(["status"=>"FREE"]);
         $countQuery = clone $query;
         $pages = new Pagination(['totalCount' => $countQuery->count(),'pageSize'=>6]);
         $models = $query->offset($pages->offset)
@@ -79,14 +84,14 @@ class SiteController extends Controller
          'models' => $models,
          'pages' => $pages,
     ]);
-        //return $this->render('index',['dataProvider'=>$dataProvider]);
     }
 
     public function actionView($id)
     {
-        $appartment=Apartment::findOne($id);
-        return $this->render('apartment2',['model'=>$appartment]);
+        $apartment=Apartment::findOne($id);
+        return $this->render('apartment',['model'=>$apartment]);
     }
+
     public function actionSignup()
     {
         if (!Yii::$app->user->isGuest) {
@@ -168,7 +173,7 @@ class SiteController extends Controller
             $contact->body=$model->body;
             if(!Yii::$app->user->isGuest)
             {
-                $contact->idUser=Yii::$app->user->identity->idUser;
+                $contact->idUser=Yii::$app->user->identity->id;
             }
             $contact->save();
             return $this->refresh();

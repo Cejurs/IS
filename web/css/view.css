@@ -55,3 +55,7 @@
 .product:hover .product-photo img {
 	transform: scale(1.05);
 }
+.link{
+	margin-right: 10px;
+	display: inline-block;
+}

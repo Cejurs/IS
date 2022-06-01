@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= $form->field($model,'adress') ?>
 <?= $form->field($model,'description') ?>
 <?= $form->field($model, 'square')->input('number', ['min' => 0, 'max' => 1000]) ?>
+<?= $form->field($model, 'monthrent')->input('number', ['min' => 10, 'max' => 100000])->label('Month Rent') ?>
 <div class="form-group">
             <div class="offset-lg-1 col-lg-11">
                 <?= Html::submitButton('AddApartment', ['class' => 'btn btn-success', 'name' => 'Add-button']) ?>

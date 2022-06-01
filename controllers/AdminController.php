@@ -15,6 +15,8 @@ use yii\data\ActiveDataProvider;
 use app\models\AddApartmentForm;
 use yii\web\UploadedFile;
 use app\models\Apartment;
+use app\models\Deal;
+
 class AdminController extends Controller{
     
     public function behaviors()
@@ -60,12 +62,10 @@ class AdminController extends Controller{
                 $apartment->adress=$model->adress;
                 $apartment->description=$model->description;
                 $apartment->square=$model->square;
-                if($apartment->save()){
-                    die();
-                };
-
+                $apartment->monthrent=$model->monthrent;
+                $apartment->save();
             };
-            $this->refresh();
+            return $this->refresh();
         }
         return $this->render('addapartment',['model' => $model]);
 
@@ -88,5 +88,15 @@ class AdminController extends Controller{
             return $this->refresh();
         }
         return $this->render('check',['model' => $model]);
+    }
+
+    public function actionGetDeals(){
+        $dataProvider=new ActiveDataProvider([
+            "query"=> Deal::find(),
+            "pagination" => [
+                "pageSize" => 20,
+            ],
+        ]);
+        return $this->render('deals',['dataProvider'=>$dataProvider]);
     }
 }

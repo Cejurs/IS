@@ -19,7 +19,13 @@ $this->registerCssFile('/css/view.css');
                  echo" <h4 >".$model->name."</h4>";
                  echo "<h5 >".$model->square."m²</h5>";
                  echo "<p >".$model->description."</p>";
-                 echo"<a href='https://nicepage.com/templates'>book room</a>";
+                 echo "<p >".$model->monthrent."$</p>";
+                 echo "<div class='link'>";
+                 echo"<a href='/site/view?id=".$model->id."'>View</a>";
+                 echo "</div>";
+                 echo "<div class='link'>";
+                 echo"<a href='/book/book?id=".$model->id."'>Book</a>";
+                 echo "</div>";
                 echo"</li>";
             }
             ?>

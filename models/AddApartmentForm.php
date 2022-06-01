@@ -13,12 +13,13 @@ class AddApartmentForm extends Model
     public $description;
     public $imgurl;
     public $square;
+    public $monthrent;
 
     public function rules()
     {
         return [
-            [['name', 'adress', 'description','square'], 'required'],
-            [['img'], 'file', 'extensions' => 'png, jpg, jfif'],
+            [['name', 'adress', 'description','square','monthrent'], 'required'],
+            [['img'], 'file', 'extensions' => 'png, jpg, jfif,jpeg'],
         ];
     }
 

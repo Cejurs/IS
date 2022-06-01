@@ -46,6 +46,7 @@ AppAsset::register($this);
                  'items' => [
                     ['label' => 'Support', 'url' => ['/admin/index']],
                     ['label' => 'Add Appartment', 'url' => ['/admin/add-apartment']],
+                    ['label' => 'Deals', 'url' => ['/admin/get-deals']],
                  ]
 
             ],

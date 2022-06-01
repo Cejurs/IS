@@ -17,7 +17,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentity($id)
     {
-        return static::findOne(['idUser'=>$id]);
+        return static::findOne(['id'=>$id]);
     }
 
     /**
@@ -44,7 +44,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getId()
     {
-        return $this->idUser;
+        return $this->id;
     }
 
     /**
