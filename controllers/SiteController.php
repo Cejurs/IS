@@ -14,6 +14,8 @@ use app\models\User;
 use app\components\Mailer;
 use app\models\Contact;
 use app\models\Apartment;
+use app\models\Account;
+use app\models\AddMoneyForm;
 use yii\data\ActiveDataProvider;
 use yii\data\Pagination;
 
@@ -27,7 +29,7 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout','book'],
+                'only' => ['logout','account'],
                 'rules' => [
                     [
                         'actions' => ['logout'],
@@ -35,7 +37,7 @@ class SiteController extends Controller
                         'roles' => ['@'],
                     ],
                     [
-                        'actions' => ['book'],
+                        'actions' => ['account'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -112,6 +114,9 @@ class SiteController extends Controller
                     'Subject' => 'Регистрация на RentApp',
                     'Letter' => "Вы успешно зарегистрировались " . $user->userName
                 ));
+                $account=new Account();
+                $account->idUser=$user->id;
+                $account->save();
                 return $this->goHome();
             }
         }
@@ -191,5 +196,32 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actionAccount()
+    {
+        $user=Yii::$app->user->identity;
+        $model=Account::find()->where(['idUser'=>$user->id])->one();
+        $addmodel=new AddMoneyForm();
+        if ($addmodel->load(Yii::$app->request->post()) && $model->validate()) {
+            if($model->penalty!=0)
+            {
+                if($addmodel->sum>=$model->penalty){
+                    $addmodel->sum-=$model->penalty;
+                    $model->penalty=0;
+                    $model->money+=$addmodel->sum;
+                }
+                else
+                {
+                    $model->penalty-=$addmodel->sum;
+                }
+            }
+            else{
+                $model->money+=$addmodel->sum;
+            }
+            $model->save();
+            return $this->refresh();
+        }
+        return $this->render('account',['model' => $model,'addmodel'=>$addmodel]);
     }
 }

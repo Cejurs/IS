@@ -37,20 +37,22 @@ class BookController extends Controller{
         if($apartment->status=="BOOKED"){
             Yii::$app->session->setFlash('ApartamentBooked');
         }
-        $user=Yii::$app->user->identity;
-        $model=new BookingForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            Yii::$app->session->setFlash('BookFormSubmitted');
-            $deal=new Deal();
-            $deal->idUser=$user->id;
-            $deal->idApartment=$apartment->id;
-            $deal->monthCount=$model->monthcount;
-            $deal->date=date("Y-m-d"); 
-            if($deal->save()){
-                $apartment->status="BOOKED";
-                $apartment->save();
+        else{
+            $user=Yii::$app->user->identity;
+            $model=new BookingForm();
+            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+                Yii::$app->session->setFlash('BookFormSubmitted');
+                $deal=new Deal();
+                $deal->idUser=$user->id;
+                $deal->idApartment=$apartment->id;
+                $deal->monthCount=$model->monthcount;
+                $deal->date=date("Y-m-d"); 
+                if($deal->save()){
+                    $apartment->status="BOOKED";
+                    $apartment->save();
+                }
+                return $this->refresh();
             }
-            return $this->refresh();
         }
         return $this->render('book', [
             'model' => $model,

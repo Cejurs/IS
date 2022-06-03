@@ -10,6 +10,15 @@ echo DetailView::widget([
         'adress',
         'description',
         'monthrent',
-        'img:image'             
+        'img:image',
+        [
+
+            'label'=>'Book',
+
+            'format'=>'raw',
+
+             'value'=>"<a href='/book/book?id=".$model->id."'>Book</a>",
+
+        ],       
     ],
 ]);
