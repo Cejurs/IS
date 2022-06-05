@@ -38,7 +38,7 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'Account', 'url' => ['/site/account']],
+            ['label' => 'Account', 'visible' => !Yii::$app->user->isGuest, 'url' => ['/site/account']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
             [
                 'label' => 'AdminPanel',
@@ -47,6 +47,7 @@ AppAsset::register($this);
                     ['label' => 'Support', 'url' => ['/admin/index']],
                     ['label' => 'Add Appartment', 'url' => ['/admin/add-apartment']],
                     ['label' => 'Deals', 'url' => ['/admin/get-deals']],
+                    ['label' => 'Backups', 'url' => ['/backup']],
                  ]
 
             ],

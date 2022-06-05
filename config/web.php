@@ -11,6 +11,23 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'modules'    => [
+        'backup' => [
+            'class' => 'fgh151\modules\backup\Module',
+            'as access' => [
+                'class' => 'yii\filters\AccessControl',
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback'=> function($rule,$action){
+                            return Yii::$app->user->identity->role==='ADMIN';
+                        }
+                    ]
+                ]
+            ]
+        ],
+    ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
