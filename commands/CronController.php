@@ -13,7 +13,14 @@ use app\models\Apartment;
 
 class CronController extends Controller
 {
-
+    public function actionTest()
+    {
+        Mailer::sendMail("cccejurs@gmail.com",array(
+            'Subject' => 'CronTest',
+            'Letter' => "Test",
+        ));
+    }
+    
     public function actionCron() // Выполняется ежедневно в 12:00
     {
         $deals=Deal::find()->where("DAY(date)=DAY(NOW()) AND status='ACTIVE'")->all();
@@ -45,10 +52,6 @@ class CronController extends Controller
     {
         $deals=Deal::find()->where("DAY(date)=DAY(NOW())AND status='ACTIVE'")->all();
         foreach($deals as $deal){
-            // if($deal->date===date("Y-m-d")) // Оплата за первый месяц взымается при букинге
-            // {
-            //     continue;
-            // }
             $user=User::find()->where(['id'=>$deal->idUser])->one();
             echo($deal->id);
             echo($user->id);

@@ -33,10 +33,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     <p style='overflow-wrap:break-word;  border: 1px solid gray; padding: 6px;'> <?= $model->name ?> </p>
 
                     <?= Html::activeLabel($model,'email') ?>
-                    <p style='overflow-wrap:break-word; border: 1px solid gray; padding: 6px;> <?= $model->email ?> </p>
+                    <p style='overflow-wrap:break-word; border: 1px solid gray; padding: 6px;'> <?= $model->email ?> </p>
 
                     <?= Html::activeLabel($model,'subject') ?>
-                    <p style='overflow-wrap:break-word'> <?= $model->subject ?> </p>
+                    <p style='overflow-wrap:break-word; border: 1px solid gray; padding: 6px;'> <?= $model->subject ?> </p>
                     <?= Html::activeLabel($model,'body') ?>
                     <p style='overflow-wrap:break-word; border: 1px solid gray; padding: 6px;'> <?= $model->body ?> </p>
                     <?= $form->field($model, 'reply')->textarea(['rows' => 6]) ?>

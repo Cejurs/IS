@@ -188,16 +188,6 @@ class SiteController extends Controller
         ]);
     }
 
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
-
     public function actionAccount()
     {
         $user=Yii::$app->user->identity;
